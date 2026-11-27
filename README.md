@@ -35,7 +35,7 @@ LearnSphere lets learners enrol in free courses, watch lessons, take quizzes and
 - Automate common tasks with a **trigger** and a **stored procedure**.
 - Report learner progress through a **view**.
 
-![LearnSphereDB overview](screenshots/00-overview.png)
+![LearnSphereDB overview](00-overview.png)
 
 ---
 
@@ -98,7 +98,7 @@ erDiagram
 
 ### ERD screenshot (from MySQL Workbench)
 
-![ERD](screenshots/01-erd.png)
+![ERD](01-erd.png)
 
 ---
 
@@ -117,7 +117,7 @@ erDiagram
 4. Refresh the **Schemas** panel on the left. You should see `learnsphere_db`.
 
 
-![Script executed successfully](screenshots/03-execution-output.png)
+![Script executed successfully](03-execution-output.png)
 
 
 ## Sample Data
@@ -159,7 +159,7 @@ INSERT INTO projects (course_id, title, brief) VALUES
 (1, 'Personal Portfolio Page', 'Build a one-page portfolio using HTML.');
 ```
 
-![Sample data inserted](screenshots/05-insert-sample-data.png)
+![Sample data inserted](05-insert-sample-data.png)
 
 ```sql
 SELECT * FROM users;
@@ -167,10 +167,10 @@ SELECT * FROM courses;
 SELECT * FROM lessons;
 ```
 
-![SELECT users](screenshots/06-select-users.png)
+![SELECT users](06-select-users.png)
 
 
-![SELECT courses and lessons](screenshots/07-select-courses-lessons.png)
+![SELECT courses and lessons](07-select-courses-lessons.png)
 
 ---
 
@@ -187,7 +187,7 @@ INSERT INTO enrollments (user_id, course_id) VALUES (2, 1);
 SELECT * FROM enrollment_log;
 ```
 
-![Trigger test](screenshots/08-trigger-test.png)
+![Trigger test](08-trigger-test.png)
 
 
 ### 2. Stored procedure: `sp_complete_lesson`
@@ -200,7 +200,7 @@ CALL sp_complete_lesson(1, 2);
 SELECT * FROM lesson_progress;
 ```
 
-![Procedure success](screenshots/09-procedure-success.png)
+![Procedure success](09-procedure-success.png)
 
 Test the error handling. User 1 is not enrolled in course 2, so this should fail:
 
@@ -209,7 +209,7 @@ CALL sp_complete_lesson(1, 4);
 -- Error 1644: User is not enrolled in this course
 ```
 
-![Procedure error](screenshots/10-procedure-error.png)
+![Procedure error](10-procedure-error.png)
 
 
 ### 3. View: `v_course_progress`
@@ -218,7 +218,7 @@ CALL sp_complete_lesson(1, 4);
 SELECT * FROM v_course_progress;
 ```
 
-![View result](screenshots/11-view-result.png)
+![View result](11-view-result.png)
 
 ---
 
@@ -234,7 +234,7 @@ GROUP BY c.course_id, c.title
 ORDER BY total_learners DESC;
 ```
 
-![Query 1](screenshots/12-query-learners-per-course.png)
+![Query 1](12-query-learners-per-course.png)
 
 
 **Lessons in a course, in order**
@@ -246,7 +246,7 @@ WHERE course_id = 1
 ORDER BY lesson_no;
 ```
 
-![Query 2](screenshots/13-query-lessons-in-order.png)
+![Query 2](13-query-lessons-in-order.png)
 
 
 **Average quiz score per quiz**
@@ -259,7 +259,7 @@ JOIN quizzes q ON q.quiz_id = a.quiz_id
 GROUP BY q.quiz_id, q.title;
 ```
 
-![Query 3](screenshots/14-query-average-score.png)
+![Query 3](14-query-average-score.png)
 
 
 **Constraint test: a duplicate enrolment is rejected**
@@ -269,7 +269,7 @@ INSERT INTO enrollments (user_id, course_id) VALUES (1, 1);
 -- Error 1062: Duplicate entry for key 'uq_enrollment'
 ```
 
-![Constraint test](screenshots/15-constraint-test.png)
+![Constraint test](15-constraint-test.png)
 
 
 ---
@@ -280,7 +280,7 @@ INSERT INTO enrollments (user_id, course_id) VALUES (1, 1);
 LearnSphereDB/
 ├── schema.sql        # Database, tables, view, trigger and stored procedure
 ├── README.md         # Project documentation
-└── screenshots/      # Images used in this README
+└──       # Images used in this README
     ├── 00-overview.png
     ├── 01-erd.png
     └── ...
